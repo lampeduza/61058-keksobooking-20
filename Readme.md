@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Марк Леммер](https://up.htmlacademy.ru/javascript/20/user/61058).
-* Наставник: `Неизвестно`.
+* Наставник: `Алексей Хапов`.
 
 ---
 
