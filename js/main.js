@@ -1,6 +1,6 @@
 'use strict'
 
-var TITLE = [
+var TITLE = [ // это заголовки
   "title1",
   "title2",
   "title3",
@@ -9,17 +9,6 @@ var TITLE = [
   "title6",
   "title7",
   "title8"
-];
-
-var ADDRESS = [
-  "Коммунистическая, 1",
-  "Новая, 1",
-  "Доватора, 1",
-  "Центральная, 1",
-  "Широкая, 1",
-  "Летейная, 1",
-  "Международная, 1",
-  "Объединения, 1"
 ];
 
 var TYPE = [
@@ -41,7 +30,7 @@ var CHECKOUTS = [
   "14:00"
 ];
 
-var FEATURES = [ // нужно сделать массив строк случайной длины. Как понять?
+var FEATURES = [
   "wifi",
   "dishwasher",
   "parking",
@@ -67,6 +56,7 @@ var PHOTOS = [
   "http://o0.github.io/assets/images/tokyo/hotel3.jpg"
 ];
 
+
 // Функция для создания массива
 var renderingArray = function () {};
 
@@ -78,16 +68,36 @@ var getRandomInteger = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+var getRandomArray = function (array) {
+  var randomArrayLength = getRandomInteger(0, array.length);
+  var copyArray = array.slice();
+  var newArray = [];
+
+  for (var i = 0; i < randomArrayLength; i++) {
+    newArray[i] = copyArray.splice(getRandomInteger(0, copyArray.length - 1), 1)[0];
+  }
+
+  return newArray;
+};
+
+var locationX = getRandomInteger(100, 1200);
+var locationY = getRandomInteger(130, 630);
+
 var getRandomArrayElement = function (array) {
   var randomValue = (Math.floor(Math.random() * array.length));
 
   return array[randomValue];
 };
 
+// функция, там должен быть цикл по массиву объектов.
+
 var generateData = function () {
-  // Генерация объекта
+
+  return data;
+};
 
 var data = [];
+
 for (var i = 1; i <= 7; i++) {
   data[i] = {
     "autor": {
@@ -95,30 +105,25 @@ for (var i = 1; i <= 7; i++) {
     },
     "offer": {
       "title": getRandomArrayElement(TITLE),
-      "address": "", // не понимаю, как делать вот это
+      "address": locationX + ", " + locationY,
       "price": getRandomInteger(15000, 50000),
       "type": getRandomArrayElement(TYPE),
       "rooms": getRandomInteger(1, 15),
       "guests": getRandomInteger(1, 6),
       "checkin": getRandomArrayElement(CHECKINS),
       "checkout": getRandomArrayElement(CHECKOUTS),
-      "features": getRandomArrayElement(FEATURES), // тут по сути должно выбираться больше 1, да? я же правильно понимаю? как же это реализовать? Другую функцию писать?
+      "features": getRandomArray(FEATURES),
       "description": getRandomArrayElement(DESCRIPTION),
-      "photos": getRandomArrayElement(PHOTOS) // и тут тоже должно быть не по одной фото, а может быть и по 2 - 3?
+      "photos": getRandomArray(PHOTOS)
     },
     "location": {
-      "x": getRandomInteger(100, 1200),
-      "y": getRandomInteger(130, 630)
+      "x": locationX,
+      "y": locationY
     }
   }
 }
 
-return data;
-};
-
 console.log(generateData());
-
-
 
 var map = document.querySelector('.map');
 map.classList.remove('map--faded');
