@@ -85,16 +85,12 @@ var getRandomArrayElement = function (array) {
   return array[randomValue];
 };
 
-var generateData = function () {
-
-  return data;
-};
-
 var data = [];
 
-for (var i = 1; i <= 7; i++) {
+var generateData = function () {
+  for (var i = 1; i <= 7; i++) {
   data[i] = {
-    "autor": {
+    "author": {
       "avatar": "img/avatars/user0" + i + ".png"
     },
     "offer": {
@@ -117,7 +113,10 @@ for (var i = 1; i <= 7; i++) {
   }
 }
 
-console.log(generateData());
+  return data;
+};
+
+generateData();
 
 var map = document.querySelector('.map');
 map.classList.remove('map--faded');
@@ -127,17 +126,21 @@ var mapPinTemplate = document.querySelector('#pin')
 .querySelector('.map__pin');
 
 // функция создания пинов на карте
-/*
-var renderPin = function () {
+var renderPin = function (pinData) {
+  console.log(pinData);
   var pin = mapPinTemplate.cloneNode(true);
   var pinImage = pin.querySelector('img');
-  pinImage.src = '';
-  pin.style.left = ;
-  pin.style.top = ;
+  pinImage.src = pinData.author.avatar;
+  pin.style.left = '';
+  pin.style.top = '';
 
   return pin;
 };
-*/
+
+for (var i = 0; i < data.length; i++) {
+  renderPin(data[i]);
+}
+
 
 
 
