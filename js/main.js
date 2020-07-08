@@ -56,10 +56,6 @@ var PHOTOS = [
   "http://o0.github.io/assets/images/tokyo/hotel3.jpg"
 ];
 
-
-// Функция для создания массива
-var renderingArray = function () {};
-
 // Функция генерации рандомного числа
 var getRandomInteger = function (min, max) {
   min = Math.ceil(min);
@@ -88,8 +84,6 @@ var getRandomArrayElement = function (array) {
 
   return array[randomValue];
 };
-
-// функция, там должен быть цикл по массиву объектов.
 
 var generateData = function () {
 
@@ -131,3 +125,23 @@ map.classList.remove('map--faded');
 var mapPinTemplate = document.querySelector('#pin')
 .content
 .querySelector('.map__pin');
+
+// функция создания пинов на карте
+/*
+var renderPin = function () {
+  var pin = mapPinTemplate.cloneNode(true);
+  var pinImage = pin.querySelector('img');
+  pinImage.src = '';
+  pin.style.left = ;
+  pin.style.top = ;
+
+  return pin;
+};
+*/
+
+
+
+
+
+
+
