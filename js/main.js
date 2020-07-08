@@ -1,59 +1,59 @@
-'use strict'
+'use strict';
 
 var TITLE = [ // это заголовки
-  "title1",
-  "title2",
-  "title3",
-  "title4",
-  "title5",
-  "title6",
-  "title7",
-  "title8"
+  'title1',
+  'title2',
+  'title3',
+  'title4',
+  'title5',
+  'title6',
+  'title7',
+  'title8'
 ];
 
 var TYPE = [
-  "palace",
-  "flat",
-  "house",
-  "bungalo"
+  'palace',
+  'flat',
+  'house',
+  'bungalo'
 ];
 
 var CHECKINS = [
-  "12:00",
-  "13:00",
-  "14:00"
+  '12:00',
+  '13:00',
+  '14:00'
 ];
 
 var CHECKOUTS = [
-  "12:00",
-  "13:00",
-  "14:00"
+  '12:00',
+  '13:00',
+  '14:00'
 ];
 
 var FEATURES = [
-  "wifi",
-  "dishwasher",
-  "parking",
-  "washer",
-  "elevator",
-  "conditioner"
+  'wifi',
+  'dishwasher',
+  'parking',
+  'washer',
+  'elevator',
+  'conditioner'
 ];
 
 var DESCRIPTION = [
-  "description1",
-  "description2",
-  "description3",
-  "description4",
-  "description5",
-  "description6",
-  "description7",
-  "description8"
+  'description1',
+  'description2',
+  'description3',
+  'description4',
+  'description5',
+  'description6',
+  'description7',
+  'description8'
 ];
 
 var PHOTOS = [
-  "http://o0.github.io/assets/images/tokyo/hotel1.jpg",
-  "http://o0.github.io/assets/images/tokyo/hotel2.jpg",
-  "http://o0.github.io/assets/images/tokyo/hotel3.jpg"
+  'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
+  'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
+  'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
 ];
 
 // Функция генерации рандомного числа
@@ -76,9 +76,6 @@ var getRandomArray = function (array) {
   return newArray;
 };
 
-var locationX = getRandomInteger(100, 1200);
-var locationY = getRandomInteger(130, 630);
-
 var getRandomArrayElement = function (array) {
   var randomValue = (Math.floor(Math.random() * array.length));
 
@@ -87,64 +84,62 @@ var getRandomArrayElement = function (array) {
 
 var data = [];
 
-var generateData = function () {
-  for (var i = 1; i <= 7; i++) {
-  data[i] = {
-    "author": {
-      "avatar": "img/avatars/user0" + i + ".png"
-    },
-    "offer": {
-      "title": getRandomArrayElement(TITLE),
-      "address": locationX + ", " + locationY,
-      "price": getRandomInteger(15000, 50000),
-      "type": getRandomArrayElement(TYPE),
-      "rooms": getRandomInteger(1, 15),
-      "guests": getRandomInteger(1, 6),
-      "checkin": getRandomArrayElement(CHECKINS),
-      "checkout": getRandomArrayElement(CHECKOUTS),
-      "features": getRandomArray(FEATURES),
-      "description": getRandomArrayElement(DESCRIPTION),
-      "photos": getRandomArray(PHOTOS)
-    },
-    "location": {
-      "x": locationX,
-      "y": locationY
-    }
-  }
-}
+var generatedData = function (index) { // придумать название функции по - лучше
+  var locationX = getRandomInteger(100, 1200);
+  var locationY = getRandomInteger(130, 630);
 
-  return data;
+  return {
+    'author': {
+      'avatar': 'img/avatars/user0' + (index + 1) + '.png'
+    },
+    'offer': {
+      'title': getRandomArrayElement(TITLE),
+      'address': locationX + ', ' + locationY,
+      'price': getRandomInteger(15000, 50000),
+      'type': getRandomArrayElement(TYPE),
+      'rooms': getRandomInteger(1, 15),
+      'guests': getRandomInteger(1, 6),
+      'checkin': getRandomArrayElement(CHECKINS),
+      'checkout': getRandomArrayElement(CHECKOUTS),
+      'features': getRandomArray(FEATURES),
+      'description': getRandomArrayElement(DESCRIPTION),
+      'photos': getRandomArray(PHOTOS)
+    },
+    'location': {
+      'x': locationX,
+      'y': locationY
+    }
+  };
+};
+
+var generateData = function () {
+  for (var i = 0; i <= 7; i++) {
+    data[i] = generatedData(i);
+  }
 };
 
 generateData();
 
 var map = document.querySelector('.map');
-map.classList.remove('map--faded');
-
 var mapPinTemplate = document.querySelector('#pin')
 .content
 .querySelector('.map__pin');
+var mapPins = document.querySelector('.map__pins');
+var fragment = document.createDocumentFragment();
+map.classList.remove('map--faded');
+mapPins.appendChild(fragment);
 
 // функция создания пинов на карте
 var renderPin = function (pinData) {
-  console.log(pinData);
   var pin = mapPinTemplate.cloneNode(true);
   var pinImage = pin.querySelector('img');
   pinImage.src = pinData.author.avatar;
-  pin.style.left = '';
-  pin.style.top = '';
+  pin.style.left = pinData.location.x + 'px';
+  pin.style.top = pinData.location.y + 'px';
 
   return pin;
 };
 
-for (var i = 0; i < data.length; i++) {
-  renderPin(data[i]);
+for (var j = 0; j < data.length; j++) {
+  fragment.appendChild(renderPin(data[j]));
 }
-
-
-
-
-
-
-
-
