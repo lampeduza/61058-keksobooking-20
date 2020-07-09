@@ -125,9 +125,7 @@ var mapPinTemplate = document.querySelector('#pin')
 .content
 .querySelector('.map__pin');
 var mapPins = document.querySelector('.map__pins');
-var fragment = document.createDocumentFragment();
 map.classList.remove('map--faded');
-mapPins.appendChild(fragment);
 
 // функция создания пинов на карте
 var renderPin = function (pinData) {
@@ -140,6 +138,10 @@ var renderPin = function (pinData) {
   return pin;
 };
 
+var fragment = document.createDocumentFragment();
+
 for (var j = 0; j < data.length; j++) {
   fragment.appendChild(renderPin(data[j]));
 }
+
+mapPins.appendChild(fragment);
