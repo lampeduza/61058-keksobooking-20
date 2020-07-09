@@ -146,12 +146,30 @@ for (var j = 0; j < data.length; j++) {
 
 mapPins.appendChild(fragment);
 
-
 // 2 задание
 var cardTemplate = document.querySelector('#card')
 .content
 .querySelector('.map__card');
 
+
+var renderCard = function () {
+  var card = cardTemplate.cloneNode(true);
+  card.querySelector('.popup__title').textContent = offer.title;
+  card.querySelector('.popup__text--address').textContent = offer.address;
+  card.querySelector('.popup__text--price').textContent = offer.price + '₽/ночь';
+  card.querySelector('.popup__type'); // надо сделать как то так, чтобы русское слово соответствовало английскому?
+  card.querySelector('.popup__text--capacity').textContent = offer.rooms + ' для ' + offer.guests + ' гостей';
+  card.querySelector('.popup__text--time').textContent = 'Заезд после ' + offer.checkin + ', выезд до ' + offer.checkout;
+  card.querySelector('.popup__features').textContent = offer.features;
+  card.querySelector('.popup__description').textContent = offer.description;
+  card.querySelector('.popup__photos').textContent = offer.photos;
+  card.querySelector('.popup__avatar').src = author.avatar;
+
+  return card;
+};
+
+// Функция внеcения изменений в DOM
+// 2. Вставьте полученный DOM-элемент в блок .map перед блоком .map__filters-container.
 
 
 
