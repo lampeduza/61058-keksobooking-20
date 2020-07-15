@@ -1,6 +1,6 @@
 'use strict';
 
-var TITLE = [ // это заголовки
+var TITLE = [
   'title1',
   'title2',
   'title3',
@@ -151,32 +151,52 @@ var cardTemplate = document.querySelector('#card')
 .content
 .querySelector('.map__card');
 
+var renderPhotos = function (photos) {
+  console.log(photos);
 
-var renderCard = function () {
+  var newPhotos = document.createDocumentFragment();
+
+  for (var i = 0; i < photos.length; i++) {
+    var photo = document.createElement('img');
+    photo.src = photos[i];
+    photo.width = 45;
+    photo.height = 45;
+    photo.classList.add('popup__photo');
+    newPhotos.appendChild(photo);
+  }
+
+  return newPhotos;
+};
+
+
+var renderCard = function (pinData) {
+  console.log(pinData);
   var card = cardTemplate.cloneNode(true);
-  card.querySelector('.popup__title').textContent = offer.title;
-  card.querySelector('.popup__text--address').textContent = offer.address;
-  card.querySelector('.popup__text--price').textContent = offer.price + '₽/ночь';
-  card.querySelector('.popup__type'); // надо сделать как то так, чтобы русское слово соответствовало английскому?
-  card.querySelector('.popup__text--capacity').textContent = offer.rooms + ' для ' + offer.guests + ' гостей';
-  card.querySelector('.popup__text--time').textContent = 'Заезд после ' + offer.checkin + ', выезд до ' + offer.checkout;
-  card.querySelector('.popup__features').textContent = offer.features;
-  card.querySelector('.popup__description').textContent = offer.description;
-  card.querySelector('.popup__photos').textContent = offer.photos;
-  card.querySelector('.popup__avatar').src = author.avatar;
+  var popupPhotos = card.querySelector('.popup__photos');
+  var cardPhoto = popupPhotos.querySelector('img');
+  cardPhoto.remove();
+
+  card.querySelector('.popup__title').textContent = pinData.offer.title;
+  card.querySelector('.popup__text--address').textContent = pinData.offer.address;
+  card.querySelector('.popup__text--price').textContent = pinData.offer.price + '₽/ночь';
+  card.querySelector('.popup__type');
+  card.querySelector('.popup__text--capacity').textContent = pinData.offer.rooms + ' для ' + pinData.offer.guests + ' гостей';
+  card.querySelector('.popup__text--time').textContent = 'Заезд после ' + pinData.offer.checkin + ', выезд до ' + pinData.offer.checkout;
+  card.querySelector('.popup__features').textContent = pinData.offer.features;
+  card.querySelector('.popup__description').textContent = pinData.offer.description;
+  card.querySelector('.popup__photos').appendChild(renderPhotos(pinData.offer.photos));
+  card.querySelector('.popup__avatar').src = pinData.author.avatar;
 
   return card;
 };
 
-// Функция внеcения изменений в DOM
-// 2. Вставьте полученный DOM-элемент в блок .map перед блоком .map__filters-container.
+var map = document.querySelector('.map');
+var mapFilterContainer = map.querySelector('.map__filters-container');
+map.insertBefore(renderCard(data[0]), mapFilterContainer);
 
 
 
-
-
-
-
+// создать функцию про фичи. (скрывать ненужные, показывать нужные) с добавлением класса hidden.
 
 
 
