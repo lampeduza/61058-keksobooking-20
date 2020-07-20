@@ -168,14 +168,17 @@ var renderPhotos = function (photos) {
   return newPhotos;
 };
 
-
 var renderCard = function (pinData) {
   console.log(pinData);
   var card = cardTemplate.cloneNode(true);
   var popupPhotos = card.querySelector('.popup__photos');
   var cardPhoto = popupPhotos.querySelector('img');
   cardPhoto.remove();
-
+  // сюда вставить найденные элементы
+  /*
+  var popupFeatures = cardTemplate.querySelector('.popup__features');
+  var popupFeature = popupFeatures.querySelectorAll('.popup__feature');
+  */
   card.querySelector('.popup__title').textContent = pinData.offer.title;
   card.querySelector('.popup__text--address').textContent = pinData.offer.address;
   card.querySelector('.popup__text--price').textContent = pinData.offer.price + '₽/ночь';
@@ -196,7 +199,35 @@ map.insertBefore(renderCard(data[0]), mapFilterContainer);
 
 
 
+
+
 // создать функцию про фичи. (скрывать ненужные, показывать нужные) с добавлением класса hidden.
+
+/*
+var showAvailableFeatures = function () { // передать объектом массив фич
+  for (var i = 0; i < .length; i++) { // нужно пройтись по фичам в объекте, проверить, какие фичи есть в массиве и уже отображать
+
+  }
+
+  if () {
+
+  }
+};
+*/
+ // нужно получить список элементов списка. Проверить, есть ли элемент списка с классом из массива.
+
+/*
+аа, понял кажется.
+Эти фичи генерятся в объекте. к примеру, у нас есть 4 фичи.
+Они уже сгенерированы.
+Дальше надо добавить проверку на классы и уже отображать эти фичи, а те, которых нет, их скрывать?
+*/
+
+
+
+
+
+
 
 
 
