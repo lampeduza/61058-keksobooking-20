@@ -168,6 +168,21 @@ var renderPhotos = function (photos) {
   return newPhotos;
 };
 
+var addFeatures = function (features, element) { // параметры
+  var featuresList = element.querySelector('.popup__features');
+  featuresList.innerHTML = '';
+
+  var fragment = document.createDocumentFragment();
+
+  for (var i = 0; i < features.length; i++) {
+    var newListItem = document.createElement('li');
+    newListItem.className = 'popup__feature' + ' ' + 'popup__feature--' + features[i];
+    fragment.appendChild(newListItem);
+  }
+
+  featuresList.appendChild(fragment);
+};
+
 var renderCard = function (pinData) {
   console.log(pinData);
   var card = cardTemplate.cloneNode(true);
@@ -175,22 +190,18 @@ var renderCard = function (pinData) {
   var cardPhoto = popupPhotos.querySelector('img');
   cardPhoto.remove();
 
-
-/*
-  var featureListElement = cardTemplate.querySelector('.popup__features').children; // правильно ли я сделал?)
-*/
-
-
   card.querySelector('.popup__title').textContent = pinData.offer.title;
   card.querySelector('.popup__text--address').textContent = pinData.offer.address;
   card.querySelector('.popup__text--price').textContent = pinData.offer.price + '₽/ночь';
   card.querySelector('.popup__type');
   card.querySelector('.popup__text--capacity').textContent = pinData.offer.rooms + ' для ' + pinData.offer.guests + ' гостей';
   card.querySelector('.popup__text--time').textContent = 'Заезд после ' + pinData.offer.checkin + ', выезд до ' + pinData.offer.checkout;
-  card.querySelector('.popup__features').children.textContent = pinData.offer.features; // .children?
+  card.querySelector('.popup__features').textContent = addFeatures(pinData.offer.features, card);
   card.querySelector('.popup__description').textContent = pinData.offer.description;
   card.querySelector('.popup__photos').appendChild(renderPhotos(pinData.offer.photos));
   card.querySelector('.popup__avatar').src = pinData.author.avatar;
+
+  addFeatures([], card);
 
   return card;
 };
@@ -201,13 +212,15 @@ map.insertBefore(renderCard(data[0]), mapFilterContainer);
 
 
 
-/* это все, что я сделал, переписав твой код, но опять ничего не понял)
-var getFeatureListElement = function () {
-  featureListElement.className = 'popup__feature' + ' ' + 'popup__feature--' + features[i];
-};
 
-getFeatureListElement(features); // тут нужно передавать объект или константу, где хранится массив?
-*/
+
+
+
+
+
+
+
+
 
 
 
