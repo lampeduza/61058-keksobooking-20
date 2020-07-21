@@ -174,18 +174,20 @@ var renderCard = function (pinData) {
   var popupPhotos = card.querySelector('.popup__photos');
   var cardPhoto = popupPhotos.querySelector('img');
   cardPhoto.remove();
-  // сюда вставить найденные элементы
-  /*
-  var popupFeatures = cardTemplate.querySelector('.popup__features');
-  var popupFeature = popupFeatures.querySelectorAll('.popup__feature');
-  */
+
+
+/*
+  var featureListElement = cardTemplate.querySelector('.popup__features').children; // правильно ли я сделал?)
+*/
+
+
   card.querySelector('.popup__title').textContent = pinData.offer.title;
   card.querySelector('.popup__text--address').textContent = pinData.offer.address;
   card.querySelector('.popup__text--price').textContent = pinData.offer.price + '₽/ночь';
   card.querySelector('.popup__type');
   card.querySelector('.popup__text--capacity').textContent = pinData.offer.rooms + ' для ' + pinData.offer.guests + ' гостей';
   card.querySelector('.popup__text--time').textContent = 'Заезд после ' + pinData.offer.checkin + ', выезд до ' + pinData.offer.checkout;
-  card.querySelector('.popup__features').textContent = pinData.offer.features;
+  card.querySelector('.popup__features').children.textContent = pinData.offer.features; // .children?
   card.querySelector('.popup__description').textContent = pinData.offer.description;
   card.querySelector('.popup__photos').appendChild(renderPhotos(pinData.offer.photos));
   card.querySelector('.popup__avatar').src = pinData.author.avatar;
@@ -197,23 +199,15 @@ var map = document.querySelector('.map');
 var mapFilterContainer = map.querySelector('.map__filters-container');
 map.insertBefore(renderCard(data[0]), mapFilterContainer);
 
-// создать функцию про фичи. (скрывать ненужные, показывать нужные) с добавлением класса hidden.
 
-/*
-var showAvailableFeatures = function () { // передать объектом массив фич
-  for (var i = 0; i < .length; i++) { // нужно пройтись по фичам в объекте, проверить, какие фичи есть в массиве и уже отображать
 
-  }
-
-  if () {
-
-  }
+/* это все, что я сделал, переписав твой код, но опять ничего не понял)
+var getFeatureListElement = function () {
+  featureListElement.className = 'popup__feature' + ' ' + 'popup__feature--' + features[i];
 };
+
+getFeatureListElement(features); // тут нужно передавать объект или константу, где хранится массив?
 */
- // нужно получить список элементов списка. Проверить, есть ли элемент списка с классом из массива.
-/*
-аа, понял кажется.
-Эти фичи генерятся в объекте. к примеру, у нас есть 4 фичи.
-Они уже сгенерированы.
-Дальше надо добавить проверку на классы и уже отображать эти фичи, а те, которых нет, их скрывать?
-*/
+
+
+
