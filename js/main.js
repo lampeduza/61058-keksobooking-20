@@ -168,7 +168,7 @@ var renderPhotos = function (photos) {
   return newPhotos;
 };
 
-var addFeatures = function (features, element) { // параметры
+var addFeatures = function (features, element) {
   var featuresList = element.querySelector('.popup__features');
   featuresList.innerHTML = '';
 
@@ -196,12 +196,10 @@ var renderCard = function (pinData) {
   card.querySelector('.popup__type');
   card.querySelector('.popup__text--capacity').textContent = pinData.offer.rooms + ' для ' + pinData.offer.guests + ' гостей';
   card.querySelector('.popup__text--time').textContent = 'Заезд после ' + pinData.offer.checkin + ', выезд до ' + pinData.offer.checkout;
-  card.querySelector('.popup__features').textContent = addFeatures(pinData.offer.features, card);
+  addFeatures(pinData.offer.features, card);
   card.querySelector('.popup__description').textContent = pinData.offer.description;
   card.querySelector('.popup__photos').appendChild(renderPhotos(pinData.offer.photos));
   card.querySelector('.popup__avatar').src = pinData.author.avatar;
-
-  addFeatures([], card);
 
   return card;
 };
