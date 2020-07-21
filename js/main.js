@@ -189,7 +189,6 @@ var renderCard = function (pinData) {
   var popupPhotos = card.querySelector('.popup__photos');
   var cardPhoto = popupPhotos.querySelector('img');
   cardPhoto.remove();
-
   card.querySelector('.popup__title').textContent = pinData.offer.title;
   card.querySelector('.popup__text--address').textContent = pinData.offer.address;
   card.querySelector('.popup__text--price').textContent = pinData.offer.price + '₽/ночь';
@@ -207,18 +206,3 @@ var renderCard = function (pinData) {
 var map = document.querySelector('.map');
 var mapFilterContainer = map.querySelector('.map__filters-container');
 map.insertBefore(renderCard(data[0]), mapFilterContainer);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
