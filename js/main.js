@@ -152,7 +152,6 @@ var cardTemplate = document.querySelector('#card')
 .querySelector('.map__card');
 
 var renderPhotos = function (photos) {
-  console.log(photos);
 
   var newPhotos = document.createDocumentFragment();
 
@@ -172,8 +171,6 @@ var addFeatures = function (features, element) {
   var featuresList = element.querySelector('.popup__features');
   featuresList.innerHTML = '';
 
-  var fragment = document.createDocumentFragment();
-
   for (var i = 0; i < features.length; i++) {
     var newListItem = document.createElement('li');
     newListItem.className = 'popup__feature' + ' ' + 'popup__feature--' + features[i];
@@ -184,7 +181,6 @@ var addFeatures = function (features, element) {
 };
 
 var renderCard = function (pinData) {
-  console.log(pinData);
   var card = cardTemplate.cloneNode(true);
   var popupPhotos = card.querySelector('.popup__photos');
   var cardPhoto = popupPhotos.querySelector('img');
@@ -203,6 +199,5 @@ var renderCard = function (pinData) {
   return card;
 };
 
-var map = document.querySelector('.map');
 var mapFilterContainer = map.querySelector('.map__filters-container');
 map.insertBefore(renderCard(data[0]), mapFilterContainer);
